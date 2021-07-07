@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from manpowermanage import registlogin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('test/', registlogin.test)
 ]
