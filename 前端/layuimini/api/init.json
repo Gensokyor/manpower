@@ -46,6 +46,11 @@
           "href": "page/personal-tasks",
           "icon": "fa fa-stumbleupon-circle",
           "target": "_self"
+        },{
+          "title": "公司详情",
+          "href": "page/company.html",
+          "icon": "fa fa-home",
+          "target": "_self"
         }
       ]
     },
@@ -61,15 +66,10 @@
           "icon": "fa fa-dot-circle-o",
           "target": "_self"
         },
+
         {
-          "title": "公司详情",
-          "href": "page/company.html",
-          "icon": "fa fa-home",
-          "target": "_self"
-        },
-        {
-          "title": "颜色选择",
-          "href": "page/color-select.html",
+          "title": "项目列表",
+          "href": "page/projectlist.html",
           "icon": "fa fa-dashboard",
           "target": "_self"
         },
@@ -107,19 +107,19 @@
           "child": [
             {
               "title": "未审核",
-              "href": "page/",
+              "href": "page/unexamined.html",
               "icon": "fa fa-calendar-o",
               "target": "_self"
             },
             {
               "title": "已通过",
-              "href": "page/",
+              "href": "page/pass.html",
               "icon": "fa fa-check",
               "target": "_self"
             },
             {
               "title": "已拒绝",
-              "href": "page/",
+              "href": "page/refuse.html",
               "icon": "fa fa-close",
               "target": "_self"
             }
