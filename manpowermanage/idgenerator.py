@@ -95,49 +95,51 @@ def Repeatability_check(checktype: str, target: str, value):
 def generate_uid():
     if len(UserAccount.objects.all()) == 0:
         return 100000000
-    uid = UserAccount.objects.aggregate(Max('uid')) + 1
+    uid = UserAccount.objects.aggregate(Max('uid'))['uid__max'] + 1
     return uid
 
 
 def generate_pid():
     if len(Projects.objects.all()) == 0:
         return 1
-    pid = Projects.objects.aggregate(Max('uid')) + 1
+    # pid = Projects.objects.aggregate(Max('pid'))
+    # print(pid.items())
+    pid = Projects.objects.aggregate(Max('pid'))['pid__max'] + 1
     return pid
 
 
 def generate_tid():
     if len(Tasks.objects.all()) == 0:
         return 1
-    tid = Tasks.objects.aggregate(Max('uid')) + 1
+    tid = Tasks.objects.aggregate(Max('tid'))['tid__max'] + 1
     return tid
 
 
 def generate_picid():
     if len(Pictures.objects.all()) == 0:
         return 1
-    pic_id = Pictures.objects.aggregate(Max('uid')) + 1
+    pic_id = Pictures.objects.aggregate(Max('pic_id'))['pic_id__max'] + 1
     return pic_id
 
 
 def generate_cid():
     if len(Comments.objects.all()) == 0:
         return 1
-    cid = Comments.objects.aggregate(Max('uid')) + 1
+    cid = Comments.objects.aggregate(Max('cid'))['cid__max'] + 1
     return cid
 
 
 def generate_did():
     if len(Documents.objects.all()) == 0:
         return 1
-    did = Documents.objects.aggregate(Max('uid')) + 1
+    did = Documents.objects.aggregate(Max('did'))['did__max'] + 1
     return did
 
 
 def generate_dsid():
     if len(DocSets.objects.all()) == 0:
         return 1
-    dsid = DocSets.objects.aggregate(Max('uid')) + 1
+    dsid = DocSets.objects.aggregate(Max('dsid'))['dsid__max'] + 1
     return dsid
 
 

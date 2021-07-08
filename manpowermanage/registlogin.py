@@ -100,11 +100,9 @@ def edit_CorpInfo(uid, license_dsid=None, intro=None):
     if isinstance(uid, int):
         if UserAccount.objects.filter(uid=uid).exists():
             if not CorpInfo.objects.filter(uid=uid):
-                CorpInfo.objects.create(uid=uid)
+                license_dsid = generate_dsid()
+                CorpInfo.objects.create(uid=uid, license_dsid=license_dsid)
             target = CorpInfo.objects.filter(uid=uid).first()
-            if license_dsid:
-                target.license_dsid = license_dsid
-                target.save()
             if intro:
                 target.intro = intro
                 target.save()
@@ -141,18 +139,239 @@ def edit_Comments(uid, op: str, cid=None, content=None):
 
 def edit_Projects(uid, op: str, pid=None, cr_time=None, st_time=None, end_time=None, status=None, title=None,
                   intro=None, pro_dsid=None):
-    result = {'op':op}
+    result = {'op': op}
     if not isinstance(uid, int):
         if isinstance(uid, str) and uid.isdigit():
             uid = int(uid)
     if isinstance(uid, int):
         if op == 'new':
             pid = generate_pid()
+            pro_dsid = generate_dsid()
             if not cr_time:
                 cr_time = datetime.datetime.now()
             new_project = Projects.objects.create(uid=uid, pid=pid, cr_time=cr_time, st_time=st_time, end_time=end_time,
-                                                  status=1,title=title)
-            # new_project_info={'uid':new_project.uid,'pid':,'cr_time':,'st_time':,'end_time':,'status':,'title':}
+                                                  status=1, title=title, intro=intro, pro_dsid=pro_dsid)
+            new_project_info = {}
+            new_project_info['uid'] = new_project.uid
+            new_project_info['pid'] = new_project.pid
+            new_project_info['status'] = new_project.status
+            new_project_info['title'] = new_project.title
+            new_project_info['cr_time'] = new_project.cr_time
+            new_project_info['st_time'] = new_project.st_time
+            new_project_info['end_time'] = new_project.end_time
+            new_project_info['intro'] = new_project.intro
+            new_project_info['pro_dsid'] = new_project.pro_dsid
+            result['new'] = new_project_info
+        elif op == 'edit':
+            edited_projects = {}
+            if pid:
+                target = Projects.objects.filter(pid=pid)
+                if target:
+                    target = target.first()
+                    if uid == target.uid:
+                        if status:
+                            target.status = status
+                            target.save()
+                        if title:
+                            target.title = title
+                            target.save()
+                        if st_time:
+                            target.st_time = st_time
+                            target.save()
+                        if end_time:
+                            target.end_time = end_time
+                            target.save()
+                        if intro:
+                            target.intro = intro
+                            target.save()
+                        if pro_dsid:
+                            target.pro_dsid = pro_dsid
+                            target.save()
+                        edited_projects = {}
+                        edited_projects['pid'] = target.pid
+                        edited_projects['uid'] = target.uid
+                        edited_projects['cr_time'] = target.cr_time
+                        edited_projects['st_time'] = target.st_time
+                        edited_projects['end_time'] = target.end_time
+                        edited_projects['status'] = target.status
+                        edited_projects['title'] = target.title
+                        edited_projects['intro'] = target.intro
+                        edited_projects['pro_dsid'] = target.pro_dsid
+            result['edit'] = edited_projects
+        elif op == 'delete':
+            deleted_p = None
+            if pid:
+                target = Projects.objects.filter(pid=pid)
+                if target:
+                    target = target.first()
+                    if uid == target.uid:
+                        deleted_p = target.delete()
+                        print(type(deleted_p))
+            result['delete'] = deleted_p
+    return result
+
+
+def edit_Tasks(uid, op: str, pid, tid=None, status=None, intro=None, solution_dsid=None):
+    result = {'op': op}
+    if not isinstance(uid, int):
+        if isinstance(uid, str) and uid.isdigit():
+            uid = int(uid)
+    if isinstance(uid, int):
+        if op == 'new':
+            proj = Projects.objects.filter(pid=pid)
+            a = {}
+            if proj and (not Tasks.objects.filter(pid=pid, uid=uid)):
+                tid = generate_tid()
+                solution_dsid = generate_dsid()
+                new_task = Tasks.objects.create(tid=tid, status=1, uid=uid, pid=pid, solution_dsid=solution_dsid)
+                a = {'tid': new_task.tid, 'uid': new_task.uid, 'pid': new_task.pid,
+                     'solution_dsid': new_task.solution_dsid, 'status': new_task.status, 'intro': new_task.intro}
+            result[op] = a
+        elif op == 'edit':
+            if tid:
+                target = Tasks.objects.filter(tid=tid)
+            else:
+                target = Tasks.objects.filter(uid=uid, pid=pid)
+            a = {}
+            if target:
+                target = target.first()
+                if status:
+                    target.status = status
+                    target.save()
+                    a['status'] = target.status
+                if intro:
+                    target.intro = intro
+                    target.save()
+                    a['intro'] = target.intro
+            result[op] = a
+        elif op == 'delete':
+            if tid:
+                target = Tasks.objects.filter(tid=tid)
+            else:
+                target = Tasks.objects.filter(uid=uid, pid=pid)
+            result[op] = None
+            if target:
+                target = target.first()
+                a = target.delete()
+                result[op] = a
+    return result
+
+
+def edit_Documents(op: str, did=None, dpath=None, dname=None):
+    result = {'op': op}
+    if op == 'new':
+        result[op] = None
+        did = generate_did()
+        if dname and dpath:
+            new_doc = Documents.objects.create(did=did, dname=dname, dpath=dpath)
+            a = {'did': new_doc.did, 'dname': new_doc.dname, 'dpath': new_doc.dpath}
+            result[op] = a
+    elif op == 'get':
+        result[op] = None
+        if did:
+            target = Documents.objects.filter(did=did)
+            if target:
+                target = target.first()
+                a = {'did': target.did, 'dname': target.dname, 'dpath': target.dpath}
+                result[op] = a
+    elif op == 'delete':
+        result[op] = None
+        if did:
+            target = Documents.objects.filter(did=did)
+            if target:
+                a = target.delete()
+                result[op] = a
+    elif op == 'edit':  # 不建议使用
+        result[op] = None
+        if did:
+            a = {}
+            target = Documents.objects.filter(did=did)
+            if target:
+                if dname:
+                    target.dname = dname
+                    target.save()
+                    a['dname'] = target.dname
+                if dpath:
+                    target.dpath = dpath
+                    target.save()
+                    a['dpath'] = target.dpath
+            result[op] = a
+    return result
+
+
+def edit_DocSets(op, dsid, sequence=None, type=None, dids=None):
+    result = {'op': op}
+    if op == 'new':
+        new_docsets = {}
+        if not DocSets.objects.filter(dsid=dsid):
+            target = DocSets.objects.create(dsid=dsid, type=type)
+            new_docsets['dsid'] = target.dsid
+            new_docsets['type'] = target.type
+            if isinstance(sequence, str):
+                docs = sequence.split('|')
+                dids = ''
+                for i in docs:
+                    if i.isdigit():
+                        dids += i
+                target.sequence = dids
+                target.save()
+                new_docsets['sequence'] = target.sequence
+            if isinstance(dids, list):
+                dids = ''
+                for i in dids:
+                    if i.isdigit():
+                        dids += i
+                target.sequence = dids
+                target.save()
+                new_docsets['sequence'] = target.sequence
+        result[op] = new_docsets
+    elif op == 'edit':
+        new_docsets = {}
+        target = DocSets.objects.filter(dsid=dsid)
+        if target:
+            target = target.first()
+            if isinstance(sequence, str):
+                docs = sequence.split('|')
+                ds = ''
+                for i in docs:
+                    if i.isdigit():
+                        ds += i
+                        ds+='|'
+                target.sequence = ds
+                target.save()
+                new_docsets['sequence'] = target.sequence
+            if isinstance(dids, list):
+                ds = ''
+                for i in dids:
+                    if i.isdigit():
+                        ds += i
+                        ds += '|'
+                target.sequence = ds
+                target.save()
+                new_docsets['sequence'] = target.sequence
+            if type:  # 尽量避免使用
+                target.type = type
+                target.save()
+                new_docsets['type'] = target.type
+        result[op] = new_docsets
+    elif op == 'delete':
+        target = DocSets.objects.filter(dsid=dsid)
+        a=None
+        if target:
+            target = target.first()
+            a = target.delete()
+        result[op] = a
+    elif op =='get':
+        target = DocSets.objects.filter(dsid=dsid)
+        ds_info=None
+        if target:
+            target = target.first()
+            ds_info={}
+            ds_info['dsid']=target.dsid
+            ds_info['sequence']=target.sequence
+            ds_info['type']=target.type
+        result[op]=ds_info
+    return result
 
 
 def test(request):
@@ -177,4 +396,15 @@ def test(request):
     #     UserInfoedit测试
     #     result = edit_UserInfo('100000001', QQ=333)
     #     return HttpResponse(result.items())
-    return HttpResponse('result.items()')
+    # result = edit_Projects(uid=100000001, op='new', intro='22222')
+    # result = edit_Projects(uid=100000001, pid=5, op='edit', intro='3333')
+    # result = edit_Projects(uid=100000001, pid=7, op='delete', intro='3333')
+    # 测试Tasks
+    # result=edit_Tasks(uid=100000001,op='new',pid=1,)
+    # result=edit_Tasks(uid=100000001,op='edit',pid=1,intro='3333')
+    # result = edit_Tasks(uid=100000001, op='delete', pid=1, intro='3333')
+    # result = edit_DocSets(op='new', type='1',dsid=1)
+    # result = edit_DocSets(op='edit',dsid=1,sequence='123|51|21')
+    # result = edit_DocSets(op='edit', dsid=1,dids=['555','321','555'])
+    result = edit_DocSets(op='delete',dsid=1)
+    return HttpResponse(result[result['op']])
