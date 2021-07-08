@@ -1,6 +1,7 @@
 from manpowermanage.models import *
 from manpowermanage.idgenerator import *
 from django.http import HttpResponse
+import datetime
 
 
 def regist_account(newaccount: str, newpwd: str, name: str):
@@ -136,6 +137,22 @@ def edit_Comments(uid, op: str, cid=None, content=None):
                 if cid:
                     result['delete'] = Comments.objects.filter(cid=cid).delete()
     return result
+
+
+def edit_Projects(uid, op: str, pid=None, cr_time=None, st_time=None, end_time=None, status=None, title=None,
+                  intro=None, pro_dsid=None):
+    result = {'op':op}
+    if not isinstance(uid, int):
+        if isinstance(uid, str) and uid.isdigit():
+            uid = int(uid)
+    if isinstance(uid, int):
+        if op == 'new':
+            pid = generate_pid()
+            if not cr_time:
+                cr_time = datetime.datetime.now()
+            new_project = Projects.objects.create(uid=uid, pid=pid, cr_time=cr_time, st_time=st_time, end_time=end_time,
+                                                  status=1,title=title)
+            # new_project_info={'uid':new_project.uid,'pid':,'cr_time':,'st_time':,'end_time':,'status':,'title':}
 
 
 def test(request):
