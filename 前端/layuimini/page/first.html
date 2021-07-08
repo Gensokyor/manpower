@@ -1,12 +1,22 @@
+<!--<style>-->
+<!--    .first .layui-card{-->
+<!--        border-color: #da4f49;-->
+<!--        border-width: 5px;-->
+<!--        width: 500px;-->
+<!--    }-->
+<!--</style>-->
 <div class="layuimini-container layuimini-page-anim">
     <div class="layuimini-main first">
+
         <div class="layui-card">
             <div class="layui-row layui-col-space15">
-                <div class="layui-carousel" id="test1" style="margin-top: 15px;" align="center">
-                    <div carousel-item="">
-                        <div><img src="../../layuimini/images/i1%20(2).jpg" height="100%" width="100%"></div>
-                        <div><img src="../../layuimini/images/i1%20(1).jpg" height="100%" width="100%"></div>
-                        <div><img src="../../layuimini/images/i1%20(3).jpg" height="100%" width="100%"></div>
+                <div align="center">
+                    <div class="layui-carousel" id="test1" style="margin-top: 15px;" align="center">
+                        <div carousel-item="">
+                            <div><img src="../../layuimini/images/i1%20(2).jpg" height="100%" width="100%"></div>
+                            <div><img src="../../layuimini/images/i1%20(1).jpg" height="100%" width="100%"></div>
+                            <div><img src="../../layuimini/images/i1%20(3).jpg" height="100%" width="100%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -17,42 +27,31 @@
 <div class="layui-row layui-col-space12">
     <ul>
         <li>
-
+            <div class="layui-col-md3">
+                <div style="background-color:#ffffff;min-height:300px;padding: 10px">
+                    <div class="layui-card">
+                        <div class="layui-card-header"><h2>公司名称</h2></div>
+                        <div class="layui-card-body">
+                            <!--                            这里可以放logo之类的?-->
+                            <img src="https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"
+                                 style="height: 150px;width: 240px">
+                            <br> <br>
+                            <a href="./company.html">这里放上公司简介，链接地址也要改</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </li>
     </ul>
-    <div class="layui-col-xs12 layui-col-md3">
-        <div id="c1" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
-    </div>
-    <div class="layui-col-xs12 layui-col-md3">
-        <div id="c2" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
-    </div>
-    <div class="layui-col-xs12 layui-col-md3">
-        <div id="c3" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
-    </div>
-    <div class="layui-col-xs12 layui-col-md3">
-        <div id="c4" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
-    </div>
-</div>
-<div class="layui-row layui-col-space12">
-    <div class="layui-col-xs12 layui-col-md3">
-        <div  style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
-    </div>
-    <div class="layui-col-xs12 layui-col-md3">
-        <div style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
-    </div>
-    <div class="layui-col-xs12 layui-col-md3">
-        <div  style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
-    </div>
-    <div class="layui-col-xs12 layui-col-md3">
-        <div  style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
-        </div>
 
+</div>
+</div>
+
+<div>
+
+</div>
 <script>
-    var a = ['Alice', 'Bob'];
-    for (var i = 0; i < a.length; i++) {
-        $('ul').append('<li>' + a[i] + '</li>');
-        
-        layui.use(['carousel', 'form'], function () {
+    layui.use(['carousel', 'form'], function () {
         var carousel = layui.carousel
             , form = layui.form;
 

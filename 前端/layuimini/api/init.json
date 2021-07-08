@@ -9,7 +9,6 @@
     "href": ""
   },
   "menuInfo": [
-
     {
       "title": "个人可见",
       "icon": "fa fa-address-book",
@@ -26,7 +25,15 @@
           "title": "test",
           "href": "page/test1.html",
           "icon": "fa fa-window-maximize",
-          "target": "_self"
+          "target": "_self",
+          "child": [
+            {
+              "title": "t1",
+              "href": "page/t1.html",
+              "icon": "fa fa-window-maximize",
+              "target": "_self"
+            }
+          ]
         },
         {
           "title": "我的任务",
@@ -72,7 +79,6 @@
           "icon": "fa fa-angle-double-down",
           "target": "_self"
         },
-
         {
           "title": "富文本编辑器",
           "href": "page/editor.html",
