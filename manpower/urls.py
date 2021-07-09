@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from manpowermanage import registlogin
 from django.urls import path,include
+from manpowermanage import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', registlogin.test),
-    path('manpowermanage/',include('manpowermanage.urls'))
+    # path('test/', registlogin.test),
+    path('test/',views.test),
+    path('test2/',views.test2),
+    path('loginpage/',views.loginpage,name='loginpage'),
+    path('login/',views.login)
 ]

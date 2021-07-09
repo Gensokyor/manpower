@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>OJ_entrance</title>
+
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="../static/css/style.css" type="text/css" media="all" />
+
+    <!-- fontawesome v5 -->
+    <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <section class="forms">
+        <div class="container">
+            <!-- logo -->
+            <div class="logo">
+                <a class="brand-logo" href="index.html">Man Power Platform</a>
+            </div>
+            <!-- //logo -->
+            <div class="forms-grid">
+
+                <!-- login -->
+                <div class="login">
+                    <span class="fas fa-sign-in-alt"></span>
+                    <strong>Welcome!</strong>
+                    <span>Sign in to your account</span>
+
+                    <form action="/login/" method="post" class="login-form">
+                        <fieldset>
+                            <div class="form">
+                                <div class="form-row">
+                                    <span class="fas fa-user"></span>
+                                    <label class="form-label" for="input">Name</label>
+                                    <input type="text" class="form-text" name="account">
+                                </div>
+                                <div class="form-row">
+                                    <span class="fas fa-eye"></span>
+                                    <label class="form-label" for="input">Password</label>
+                                    <input type="password" class="form-text" name="pwd">
+                                </div>
+                                
+                                <div class="form-row button-login">
+                                    <input type="submit" class="btn btn-login" value="Login">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- //login -->
+
+                <!-- register -->
+                <div class="register">
+                    <span class="fas fa-user-circle"></span>
+                    <strong>Create account!</strong>
+                    <form action="/register/" method="post" class="register-form">
+                        <fieldset>
+                            <div class="form">
+                                <div class="form-row">
+                                    <span class="fas fa-user"></span>
+                                    <label class="form-label" for="input">Name</label>
+                                    <input type="text" class="form-text" name="account">
+                                </div>
+                                <div class="form-row">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                                <div class="form-row">
+                                    <span class="fas fa-lock"></span>
+                                    <label class="form-label" for="input">Password</label>
+                                    <input type="password" class="form-text" name="pwd">
+                                </div>
+								<div class="form-row">
+                                    <label class="form-label" for="input">Name</label>
+                                    <input type="text" class="form-text" name="name">
+                                </div>
+                                <div class="form-row button-login">
+                                    <input type="submit" class="btn btn-login" value="Create">
+                                </div>
+                            </div>
+                        </fieldset>
+                        </form>
+
+                        
+                </div>
+                <!-- //register -->
+            </div>
+
+            <!-- copyright -->
+            
+            <!-- //copyright -->
+        </div>
+    </section>
+
+</body>
+
+</html>
