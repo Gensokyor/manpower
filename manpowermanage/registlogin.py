@@ -146,7 +146,8 @@ def edit_Projects(uid, op: str, pid=None, cr_time=None, st_time=None, end_time=N
     if not isinstance(uid, int):
         if isinstance(uid, str) and uid.isdigit():
             uid = int(uid)
-    if isinstance(uid, int):
+    if True:
+    # if isinstance(uid, int):
         if op == 'new':
             pid = generate_pid()
             pro_dsid = generate_dsid()
@@ -171,7 +172,8 @@ def edit_Projects(uid, op: str, pid=None, cr_time=None, st_time=None, end_time=N
                 target = Projects.objects.filter(pid=pid)
                 if target:
                     target = target.first()
-                    if uid == target.uid:
+                    if True:
+                    # if uid == target.uid:
                         if status:
                             target.status = status
                             target.save()
@@ -190,7 +192,6 @@ def edit_Projects(uid, op: str, pid=None, cr_time=None, st_time=None, end_time=N
                         if pro_dsid:
                             target.pro_dsid = pro_dsid
                             target.save()
-                        edited_projects = {}
                         edited_projects['pid'] = target.pid
                         edited_projects['uid'] = target.uid
                         edited_projects['cr_time'] = target.cr_time
@@ -211,6 +212,16 @@ def edit_Projects(uid, op: str, pid=None, cr_time=None, st_time=None, end_time=N
                         deleted_p = target.delete()
                         print(type(deleted_p))
             result['delete'] = deleted_p
+        elif op == 'query':
+            query = []
+            if uid:
+                a = Projects.objects.filter(uid=uid)
+                for i in a:
+                    query.append(
+                        {'pid': i.pid, 'uid': i.uid, 'cr_time': i.cr_time, 'st_time': i.st_time, 'end_time': i.end_time,
+                         'status': i.status, 'title': i.title, 'intro': i.intro, 'pro_dsid': i.pro_dsid})
+            result[op] = query
+
     return result
 
 
@@ -257,6 +268,16 @@ def edit_Tasks(uid, op: str, pid, tid=None, status=None, intro=None, solution_ds
                 target = target.first()
                 a = target.delete()
                 result[op] = a
+        elif op == 'query':
+            query = []
+            if uid:
+                a = Tasks.objects.filter(uid=uid)
+                for i in a:
+                    query.append(
+                        {'pid': i.pid, 'uid': i.uid, 'tid': i.tid,
+                         'status': i.status, 'intro': i.intro, 'solution_dsid': i.solution_dsid})
+            result[op] = query
+
     return result
 
 
@@ -383,14 +404,16 @@ def get_recommend():
     a = Projects.objects.all()
     result['pro'] = [a[1], a[2], a[3], a[4]]
     b = CorpInfo.objects.all()
-    uids = [int(b[1].uid), int(b[2].uid), int(b[3].uid), int(b[4].uid), int(b[5].uid)]
-    pic_ids = UserInfo.objects.filter(uid_in=[uids]).values('uid', 'photo')
-    names = UserAccount.objects.filter(uid_in=[uids]).values('uid', 'name')
-    intros = CorpInfo.objects.filter(uid_in=[uids]).values('uid', 'intro')
-    result['pic_ids'] = pic_ids
-    result['names'] = names
-    result['intros'] = intros
-    return result
+    uids = [int(b[1].uid), int(b[2].uid), int(b[3].uid), int(b[4].uid), int(b[5].uid), int(b[6].uid), int(b[7].uid),
+            int(b[8].uid), int(b[9].uid), int(b[10].uid)]
+    results = []
+    for i in uids:
+        corpname = UserAccount.objects.filter(uid=i).first().name
+        intro = CorpInfo.objects.filter(uid=i).first().intro
+        results.append({'uid': i, 'name': corpname, 'intro': intro})
+
+
+    return results
 
 
 def change_pwd(uid, oldpwd, newpwd):
@@ -419,7 +442,6 @@ def change_pwd(uid, oldpwd, newpwd):
 #         return {'pic_id':pic_file_no,'path':pic_path}
 #     else:
 #         return None
-
 
 
 def test(request):

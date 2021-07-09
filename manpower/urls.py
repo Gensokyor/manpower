@@ -16,14 +16,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from manpowermanage import registlogin
-from django.urls import path,include
+from django.urls import path, include
 from manpowermanage import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('test/', registlogin.test),
-    path('test/',views.test),
-    path('test2/',views.test2),
-    path('loginpage/',views.loginpage,name='loginpage'),
-    path('login/',views.login)
+    # path('test/', views.test),
+    # path('test2/', views.test2),
+    path('loginpage/', views.loginpage, name='loginpage'),
+    path('login/', views.login),
+    path('corp_settings/', views.corp_settings),
+    path('setting_corp/', views.setting_corp),
+    path('flush/', views.flush, name='flush'),
+    path('edit_project/', views.edit_project),  ###
+    path('edit_pro/', views.edit_pro),
+    path('home/', views.home, name='home'),
+    path('personalTasks/', views.PTasks),
+    path('projectlist/', views.projectlist),
+    path('search/', views.search),
+    path('register/', views.regist),
+    path('user_settings/', views.user_settings),
+    path('setting_user/', views.setting_user),
+    ##############################
+    path('projectData/', views.projectData),
 ]
