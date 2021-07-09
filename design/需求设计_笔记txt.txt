@@ -48,6 +48,22 @@
 
 
 
+代码规范:
+uid最低8位
+account~8	num+abc
+pwd~8 num+abc+_
+
+account type:1-admin ,2-corp,3-normal
+
+project status: 1-未提交,2-审核中,3-未发布,
+4-已发布,5-已截止
+task status:1-已加入,2-已提交,3-未采纳,4-已通过,5-面试邀约,6-已接受面试,7-已拒绝面试
+
+sequence: did1|did2|did3
+
+dsid type:1-project,2-task,3-corplicense
+
+
 
 
 
