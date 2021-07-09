@@ -2,6 +2,8 @@ from manpowermanage.models import *
 from manpowermanage.idgenerator import *
 from django.http import HttpResponse
 import datetime
+import os
+from manpower import settings
 
 
 def regist_account(newaccount: str, newpwd: str, name: str, account_type=3):
@@ -385,25 +387,39 @@ def get_recommend():
     pic_ids = UserInfo.objects.filter(uid_in=[uids]).values('uid', 'photo')
     names = UserAccount.objects.filter(uid_in=[uids]).values('uid', 'name')
     intros = CorpInfo.objects.filter(uid_in=[uids]).values('uid', 'intro')
-    result['pic_ids']=pic_ids
-    result['names']=names
-    result['intros']=intros
+    result['pic_ids'] = pic_ids
+    result['names'] = names
+    result['intros'] = intros
     return result
 
-def change_pwd(uid,oldpwd,newpwd):
-    result=False
-    target=UserAccount.objects.filter(uid=uid,pwd=oldpwd)
+
+def change_pwd(uid, oldpwd, newpwd):
+    result = False
+    target = UserAccount.objects.filter(uid=uid, pwd=oldpwd)
     if target:
-        target=target.first()
-        target.pwd=newpwd
+        target = target.first()
+        target.pwd = newpwd
         target.save()
-        result=True
+        result = True
     return result
 
-# def save_pic(Files:list):
-#     if
-#     for i in Files:
-#         i.
+
+# def save_pic(request):
+#     if request.method == 'POST':
+#         # picfile = request.FILES['picfile']
+#         pics=None
+#         pics= request.FILES['picfile']
+#         for pic in pics
+#         pic_file_no=None
+#         pic_file_no=generate_picid()
+#         pic_path = os.path.join(settings.IMG_ROOT, str(pic_file_no))
+#         with open(pic_path, 'wb') as f:
+#             for pic_Part in pic.chunks():
+#                 f.write(pic_Part)
+#         return {'pic_id':pic_file_no,'path':pic_path}
+#     else:
+#         return None
+
 
 
 def test(request):
