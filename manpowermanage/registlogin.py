@@ -4,11 +4,12 @@ from django.http import HttpResponse
 import datetime
 
 
-def regist_account(newaccount: str, newpwd: str, name: str):
+def regist_account(newaccount: str, newpwd: str, name: str, account_type=3):
     if lencontent_check('str', 'account', newaccount) and lencontent_check('str', 'pwd', newpwd) and lencontent_check(
             'str', 'name', name):
         uid = Idgenerator('uid')
-        result = UserAccount.objects.create(uid=uid, account=newaccount, pwd=newpwd, account_type=3, name=name)
+        result = UserAccount.objects.create(uid=uid, account=newaccount, pwd=newpwd, account_type=account_type,
+                                            name=name)
         print(result, type(result))
         return result
     else:
@@ -336,7 +337,7 @@ def edit_DocSets(op, dsid, sequence=None, type=None, dids=None):
                 for i in docs:
                     if i.isdigit():
                         ds += i
-                        ds+='|'
+                        ds += '|'
                 target.sequence = ds
                 target.save()
                 new_docsets['sequence'] = target.sequence
@@ -356,22 +357,53 @@ def edit_DocSets(op, dsid, sequence=None, type=None, dids=None):
         result[op] = new_docsets
     elif op == 'delete':
         target = DocSets.objects.filter(dsid=dsid)
-        a=None
+        a = None
         if target:
             target = target.first()
             a = target.delete()
         result[op] = a
-    elif op =='get':
+    elif op == 'get':
         target = DocSets.objects.filter(dsid=dsid)
-        ds_info=None
+        ds_info = None
         if target:
             target = target.first()
-            ds_info={}
-            ds_info['dsid']=target.dsid
-            ds_info['sequence']=target.sequence
-            ds_info['type']=target.type
-        result[op]=ds_info
+            ds_info = {}
+            ds_info['dsid'] = target.dsid
+            ds_info['sequence'] = target.sequence
+            ds_info['type'] = target.type
+        result[op] = ds_info
     return result
+
+
+def get_recommend():
+    # 项目
+    result = {}
+    a = Projects.objects.all()
+    result['pro'] = [a[1], a[2], a[3], a[4]]
+    b = CorpInfo.objects.all()
+    uids = [int(b[1].uid), int(b[2].uid), int(b[3].uid), int(b[4].uid), int(b[5].uid)]
+    pic_ids = UserInfo.objects.filter(uid_in=[uids]).values('uid', 'photo')
+    names = UserAccount.objects.filter(uid_in=[uids]).values('uid', 'name')
+    intros = CorpInfo.objects.filter(uid_in=[uids]).values('uid', 'intro')
+    result['pic_ids']=pic_ids
+    result['names']=names
+    result['intros']=intros
+    return result
+
+def change_pwd(uid,oldpwd,newpwd):
+    result=False
+    target=UserAccount.objects.filter(uid=uid,pwd=oldpwd)
+    if target:
+        target=target.first()
+        target.pwd=newpwd
+        target.save()
+        result=True
+    return result
+
+# def save_pic(Files:list):
+#     if
+#     for i in Files:
+#         i.
 
 
 def test(request):
@@ -406,5 +438,5 @@ def test(request):
     # result = edit_DocSets(op='new', type='1',dsid=1)
     # result = edit_DocSets(op='edit',dsid=1,sequence='123|51|21')
     # result = edit_DocSets(op='edit', dsid=1,dids=['555','321','555'])
-    result = edit_DocSets(op='delete',dsid=1)
+    result = edit_DocSets(op='delete', dsid=1)
     return HttpResponse(result[result['op']])

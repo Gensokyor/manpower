@@ -1,4 +1,4 @@
-注册用户:regist_account(newaccount: str, newpwd: str, name: str)
+注册用户:regist_account(newaccount: str, newpwd: str, name: str,account_type=3)
 	要求用户名长度>8,<16且唯一	密码长度>8,<16 name>8,<16
 	成功返回True ,失败False
 
@@ -22,15 +22,16 @@ edit_CorpInfo(uid, license_dsid=None, intro=None)
 	
 操作评论Comments:
 edit_Comments(uid, op: str, cid=None, content=None)
-	op可选['query','add','delete'],query需指定uid,delete指定cid
+	op可选['query','add','delete'],query需指定uid,delete指定cid,
 	query返回字典{'op':'query','query':[[cid,uid,content]...]}
 	add返回{'op':'add','add':{'cid': cid, 'uid': uid, 'content': content}}
 	delete返回删除的条数
-	失败:字典仅有'op'键(op参数错误),result[op]
+	失败:字典仅有'op'键(op参数错误),result[op]为空
 	
 	
 
-
+获取推荐的五个企业
+个人账户升级
 
 
 
