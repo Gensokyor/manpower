@@ -22,18 +22,10 @@
           "target": "_self"
         },
         {
-          "title": "test",
-          "href": "page/test1.html",
-          "icon": "fa fa-window-maximize",
-          "target": "_self",
-          "child": [
-            {
-              "title": "t1",
-              "href": "page/t1.html",
-              "icon": "fa fa-window-maximize",
-              "target": "_self"
-            }
-          ]
+          "title": "发现项目",
+          "href": "page/search.html",
+          "icon": "fa fa-stumbleupon-circle",
+          "target": "_self"
         },
         {
           "title": "我的任务",
@@ -42,34 +34,30 @@
           "target": "_self"
         },
         {
-          "title": "发现项目",
-          "href": "page/search.html",
-          "icon": "fa fa-stumbleupon-circle",
-          "target": "_self"
-        },{
-          "title": "公司详情",
-          "href": "page/company.html",
-          "icon": "fa fa-home",
-          "target": "_self"
-        }
-      ,
-        {
           "title": "其他页面方便调试",
           "href": "page/",
           "icon": "fa fa-stumbleupon-circle",
           "target": "_self",
-          "child":[{
-            "title": "项目详情",
-            "href": "page/projectdata.html",
-            "icon": "fa fa-stumbleupon-circle",
-            "target": "_self"
-          },
+          "child": [
+            {
+              "title": "项目详情",
+              "href": "page/projectdata.html",
+              "icon": "fa fa-stumbleupon-circle",
+              "target": "_self"
+            },
             {
               "title": "上传任务",
               "href": "page/uploadtask.html",
               "icon": "fa fa-stumbleupon-circle",
               "target": "_self"
-            }]
+            },
+            {
+              "title": "公司详情",
+              "href": "page/company.html",
+              "icon": "fa fa-home",
+              "target": "_self"
+            }
+          ]
         }
       ]
     },
@@ -85,7 +73,6 @@
           "icon": "fa fa-dot-circle-o",
           "target": "_self"
         },
-
         {
           "title": "项目列表",
           "href": "page/projectlist.html",
@@ -120,7 +107,6 @@
       "child": [
         {
           "title": "审批项目",
-
           "icon": "fa fa-meetup",
           "target": "_self",
           "child": [

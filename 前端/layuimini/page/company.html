@@ -57,7 +57,44 @@
         </div>
     </fieldset>
     <fieldset class="layui-elem-field">
-        <legend>评论区</legend>
+            <legend>评论区</legend>
+        <ul>
+            <li>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                    <legend></legend>
+                </fieldset>
+                <blockquote class="layui-elem-quote layui-quote-nm">
+                    <div id="test4"></div><br>
+                  这里是评论内容
+                </blockquote>
+            </li>
+            <li>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                    <legend></legend>
+                </fieldset>
+                <blockquote class="layui-elem-quote layui-quote-nm">
+                    <div id="test2"></div><br>
+                   这里是评论内容
+                </blockquote>
+            </li>
+            <li>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+<!--                  这里评分文字要动态 -->
+                    <legend>4星</legend>
+                </fieldset>
+                <p>如果上面那个星星不是很好赋值，可以用这种</p>
+                <blockquote class="layui-elem-quote layui-quote-nm">
+<!--                    <div id="test1"></div><br> -->
+                   这里是评论内容
+                </blockquote>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                    <legend></legend>
+                </fieldset>
+            </li>
+        </ul>
+    </fieldset>
+    <fieldset class="layui-elem-field">
+        <legend>发表评论</legend>
         <div class="layui-field-box">
             <div layui-form layuimini-form>
                 <div class="layui-form-item">
@@ -78,26 +115,6 @@
                 </div>
             </div>
         </div>
-        <!--        <div class="layui-field-box">-->
-        <!--            <div layui-form layuimini-form>-->
-        <!--                <div class="layui-form-item">-->
-        <!--                    <label class="layui-form-label required "> 工作环境：</label>-->
-        <!--                    <div id="test1"></div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <div class="layui-field-box">-->
-        <!--            <div layui-form layuimini-form>-->
-        <!--                <div class="layui-form-item">-->
-        <!--                    <label class="layui-form-label required "> 工作报酬：</label>-->
-        <!--                    <div id="test2"></div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-
-        <!--            <div class="layui-card">-->
-        <!--                <textarea id="demo" style="display: none;"></textarea>-->
-        <!--            </div>-->
-        <!--        </div>-->
     </fieldset>
 </div>
 
@@ -206,10 +223,17 @@
 
         rate.render({
             elem: '#test2'
-            , value: 0
-            , half: true
-            , text: true
-            , theme: '#1E9FFF'
-        })
+            ,value: 4.5
+            ,half: true
+            ,text: true
+            ,readonly: true
+        });
+        rate.render({
+            elem: '#test4'
+            ,value: 3.5
+            ,half: true
+            ,text: true
+            ,readonly: true
+        });
     });
 </script>
