@@ -13,7 +13,9 @@
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit
+                                    lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -22,6 +24,7 @@
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
+            <a class="layui-btn  layui-btn-xs data-count-watch" lay-event="watch">查看</a>
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">通过</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">拒绝</a>
         </script>
@@ -30,7 +33,7 @@
 </div>
 
 <script>
-    layui.use(['form', 'table','miniPage','element'], function () {
+    layui.use(['form', 'table', 'miniPage', 'element'], function () {
         var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
@@ -46,16 +49,16 @@
                 icon: 'layui-icon-tips'
             }],
             cols: [[
-                {type: "checkbox", width: 50},
+
                 {field: 'pid', width: 80, title: 'PID', sort: true},
-                {field: 'title', width:200, title: '项目名', sort: true},
+                {field: 'title', width: 200, title: '项目名', sort: true},
                 {field: 'name', width: 150, title: '公司名', sort: true},
                 {field: 'st_time', width: 150, title: '开始时间', sort: true},
-                {field: 'end_time', width: 150,title: '结束时间',sort: true},
+                {field: 'end_time', width: 150, title: '结束时间', sort: true},
                 {field: 'intro', width: 150, title: '项目简介'},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
-            limits: [10,  20, 50, 100],
+            limits: [10, 20, 50, 100],
             limit: 10,
             page: true,
             skin: 'line'
@@ -80,16 +83,30 @@
 
             return false;
         });
-        //监听表格复选框选择
-        table.on('checkbox(currentTableFilter)', function (obj) {
-            console.log(obj)
-        });
+
 
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
 
-            } else if (obj.event === 'delete') {
+            }else if(obj.event === 'watch'){
+                //跳转对应项目详情页
+            }
+            else if (obj.event === 'delete') {
+                var remarkReason = "";
+                layer.prompt({
+                    formType: 0,
+                    value: '',
+                    title: '请输入拒绝原因',
+                    btn: ['确定', '取消'], //按钮，
+                    btnAlign: 'c'
+                }, function (value, index) {
+                    remarkReason = value;
+                    layer.close(index);
+                    //执行不通过
+
+
+                });
                 // layer.confirm('确定拒绝', function (index) {
                 //     obj.del();
                 //     layer.close(index);

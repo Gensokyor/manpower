@@ -37,13 +37,13 @@
         },
         {
           "title": "我的任务",
-          "href": "page/personal-tasks",
+          "href": "page/personal-tasks.html",
           "icon": "fa fa-stumbleupon-circle",
           "target": "_self"
         },
         {
           "title": "发现项目",
-          "href": "page/personal-tasks",
+          "href": "page/search.html",
           "icon": "fa fa-stumbleupon-circle",
           "target": "_self"
         },{
@@ -51,6 +51,25 @@
           "href": "page/company.html",
           "icon": "fa fa-home",
           "target": "_self"
+        }
+      ,
+        {
+          "title": "其他页面方便调试",
+          "href": "page/",
+          "icon": "fa fa-stumbleupon-circle",
+          "target": "_self",
+          "child":[{
+            "title": "项目详情",
+            "href": "page/projectdata.html",
+            "icon": "fa fa-stumbleupon-circle",
+            "target": "_self"
+          },
+            {
+              "title": "上传任务",
+              "href": "page/uploadtask.html",
+              "icon": "fa fa-stumbleupon-circle",
+              "target": "_self"
+            }]
         }
       ]
     },
@@ -74,8 +93,8 @@
           "target": "_self"
         },
         {
-          "title": "下拉选择",
-          "href": "page/table-select.html",
+          "title": "项目编辑",
+          "href": "page/edit.html",
           "icon": "fa fa-angle-double-down",
           "target": "_self"
         },
@@ -101,7 +120,7 @@
       "child": [
         {
           "title": "审批项目",
-          "href": "page/approval.html",
+
           "icon": "fa fa-meetup",
           "target": "_self",
           "child": [
