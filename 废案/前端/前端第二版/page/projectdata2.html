@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>校友邦</title>
-    <link rel="stylesheet" href="../static/lib/layui-v2.5.5/css/layui.css">
+    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css">
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
@@ -34,13 +34,19 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="/home/">首页</a>
+                    <a class="" href="home.html">首页</a>
+                    <!--                    <dl class="layui-nav-child">-->
+                    <!--                        <dd><a href="https://www.baidu.com">menu 1</a></dd>-->
+                    <!--                        <dd><a href="javascript:;">menu 2</a></dd>-->
+                    <!--                        <dd><a href="javascript:;">menu 3</a></dd>-->
+                    <!--                        <dd><a href="">the links</a></dd>-->
+                    <!--                    </dl>-->
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="/search/">发现任务</a>
+                    <a class="" href="search2.html">发现任务</a>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="/personalTasks/">我的任务</a></li>
+                    <a class="" href="personal-tasks2.html">我的任务</a></li>
             </ul>
         </div>
     </div>
@@ -49,15 +55,16 @@
         <!-- 内容主体区域 -->
         <div class="layui-card">
             <br>
-            <h1>&nbsp&nbsp&nbsp&nbsp&nbsp{{ target.title }}</h1>
+            <h1>&nbsp&nbsp&nbsp&nbsp&nbsp项目名字</h1>
             <br>
             <!--            这里记得填写-->
-            <p>&nbsp&nbsp&nbsp&nbsp&nbsp{{ target.st_time }}-{{ target.end_time }}</p><br>
+            <p>&nbsp&nbsp&nbsp&nbsp&nbsp开始时间-截止时间</p><br>
             <fieldset class="layui-elem-field">
                 <legend>基本介绍</legend>
                 <div class="layui-field-box">
                     <p class="two">
-                        {{ target.intro }}
+                        新东方教育科技集团(NYSE:EDU)由1993年11月16日成立的北京新东方学校发展壮大而来，目前集团以培训为核心，拥有新东方亲子中心、泡泡少儿教育、优能中学教育、基础英语培训、大学英语及考研培训、出国考试培训、多语种培训等多个培训体系，同时在基础教育、职业教育、教育研发、出国咨询、文化产业等方面取得了骄人的成绩。作为中国最大的著名私立教育机构，新东方教育科技集团于2006年9月7日在美国纽约证券交易所成功上市。截止目前(2013年5月)，新东方已经在全国50个城市设立了57所学校、7家产业机构、30余家书店以及700余家学习中心，累计培训学员1600万人次。
+                        新东方集团属下的广州新东方学校成立于2000年9月，目前在广州拥有33个校区。学校自成立伊始一直秉承“学生为重，质量取胜”的宗旨，在提供高质量英语培训课程的同时，致力于阐扬一种朝气蓬勃、奋力向上的精神，凭借其卓越的教学理念和非凡的教学质量，迅速成为华南地区傲视同侪的业界翘楚。</p>
                 </div>
             </fieldset>
             <fieldset class="layui-elem-field">
@@ -109,7 +116,7 @@
 </div>
 
 </div>
-<script src="../static/lib/layui-v2.5.5//layui.js"></script>
+<script src="../lib/layui-v2.5.5//layui.js"></script>
 <script>
     //JS
     layui.use(['element', 'layer', 'util'], function () {

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, HttpResponse
 from manpowermanage import registlogin
 import pprint
 from datetime import datetime
+from manpowermanage.models import *
 
 
 def test(request):
@@ -50,7 +51,7 @@ def projectData(request):  #########################################
             target = target['edit']
 
             pprint.pprint(target)
-            return render(request, "projectdata2.html", target)
+            return render(request, "projectdata.html", target)
     return redirect(reverse('home'))
 
 
@@ -170,3 +171,27 @@ def setting_user(request):
         result['UserInfo'] = registlogin.edit_UserInfo(uid=uid, tel=a['phone'], QQ=a['QQ'], mail=a['mail'])
         return redirect(reverse('home'))
     return redirect(reverse('home'))
+
+
+def see_corp(request):
+    if request.method == 'GET':
+        gets = request.GET
+        uid = gets.get('uid')
+        intro = registlogin.edit_CorpInfo(uid=uid)['intro']
+        name = UserAccount.objects.filter(uid=uid).first().name
+        pros = Projects.objects.filter(uid=uid)
+        Cos = Comments.objects.filter(uid=uid)
+        return render(request, 'company2.html', {'uid': uid, 'intro': intro, 'name': name, 'pros': pros, 'Cos': Cos})
+    return redirect(reverse('home'))
+
+
+def new_Comment(request):
+    post=request.POST
+    fl=post['fl']
+    content=post['intro']
+    uid=post["uid"]
+
+    result=registlogin.edit_Comments(uid, op='add', cid=None, content=content,favor_lever=fl)
+
+
+    return  HttpResponse('ok')

@@ -54,6 +54,7 @@ class Comments(models.Model):
     cid = models.BigIntegerField( unique=True, null=False)
     uid = models.BigIntegerField( null=False)
     content = models.CharField(max_length=1000, null=False)
+    favor_lever=models.SmallIntegerField(null=True)
 
 
 class Tasks(models.Model):

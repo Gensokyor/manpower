@@ -23,7 +23,6 @@ def longin(username: str, pwd: str):
     queryresult = UserAccount.objects.filter(account=username, pwd=pwd)
     if queryresult.first():
         queryresult = queryresult.first()
-        print(queryresult)
         result['uid'] = str(queryresult.uid)
         result['account'] = queryresult.account
         result['name'] = queryresult.name
@@ -115,7 +114,7 @@ def edit_CorpInfo(uid, license_dsid=None, intro=None):
     return result
 
 
-def edit_Comments(uid, op: str, cid=None, content=None):
+def edit_Comments(uid, op: str, cid=None, content=None, favor_lever=None):
     result = {'op': op}
     if not isinstance(uid, int):
         if isinstance(uid, str) and uid.isdigit():
@@ -132,7 +131,7 @@ def edit_Comments(uid, op: str, cid=None, content=None):
                 result['add'] = {}
                 if content:
                     cid = generate_cid()
-                    Comments.objects.create(cid=cid, uid=uid, content=content)
+                    Comments.objects.create(cid=cid, uid=uid, content=content, favor_lever=favor_lever)
                     result['add'] = {'cid': cid, 'uid': uid, 'content': content}
             elif op == 'delete':
                 if cid:
@@ -147,7 +146,7 @@ def edit_Projects(uid, op: str, pid=None, cr_time=None, st_time=None, end_time=N
         if isinstance(uid, str) and uid.isdigit():
             uid = int(uid)
     if True:
-    # if isinstance(uid, int):
+        # if isinstance(uid, int):
         if op == 'new':
             pid = generate_pid()
             pro_dsid = generate_dsid()
@@ -173,7 +172,7 @@ def edit_Projects(uid, op: str, pid=None, cr_time=None, st_time=None, end_time=N
                 if target:
                     target = target.first()
                     if True:
-                    # if uid == target.uid:
+                        # if uid == target.uid:
                         if status:
                             target.status = status
                             target.save()
@@ -411,7 +410,6 @@ def get_recommend():
         corpname = UserAccount.objects.filter(uid=i).first().name
         intro = CorpInfo.objects.filter(uid=i).first().intro
         results.append({'uid': i, 'name': corpname, 'intro': intro})
-
 
     return results
 

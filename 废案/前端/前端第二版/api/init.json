@@ -1,0 +1,150 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "page/first.html"
+  },
+  "logoInfo": {
+    "title": "校友邦",
+    "image": "images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "个人可见",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "首页",
+          "href": "page/first.html",
+          "icon": "fa fa-home",
+          "target": "_self"
+        },
+        {
+          "title": "发现项目",
+          "href": "page/search.html",
+          "icon": "fa fa-stumbleupon-circle",
+          "target": "_self"
+        },
+        {
+          "title": "我的任务",
+          "href": "page/personal-tasks.html",
+          "icon": "fa fa-stumbleupon-circle",
+          "target": "_self"
+        },
+        {
+          "title": "其他页面方便调试",
+          "href": "page/",
+          "icon": "fa fa-stumbleupon-circle",
+          "target": "_self",
+          "child": [
+            {
+              "title": "项目详情",
+              "href": "page/projectdata.html",
+              "icon": "fa fa-stumbleupon-circle",
+              "target": "_self"
+            },
+            {
+              "title": "上传任务",
+              "href": "page/uploadtask.html",
+              "icon": "fa fa-stumbleupon-circle",
+              "target": "_self"
+            },
+            {
+              "title": "公司详情",
+              "href": "page/company.html",
+              "icon": "fa fa-home",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "公司可见",
+      "icon": "fa fa-lemon-o",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "发布项目",
+          "href": "page/projects.html",
+          "icon": "fa fa-dot-circle-o",
+          "target": "_self"
+        },
+        {
+          "title": "项目列表",
+          "href": "page/projectlist.html",
+          "icon": "fa fa-dashboard",
+          "target": "_self"
+        },
+        {
+          "title": "项目编辑",
+          "href": "page/edit.html",
+          "icon": "fa fa-angle-double-down",
+          "target": "_self"
+        }
+      ]
+    },
+    {
+      "title": "管理员可见",
+      "icon": "fa fa-slideshare",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "审批项目",
+          "icon": "fa fa-meetup",
+          "target": "_self",
+          "child": [
+            {
+              "title": "未审核",
+              "href": "page/unexamined.html",
+              "icon": "fa fa-calendar-o",
+              "target": "_self"
+            },
+            {
+              "title": "已通过",
+              "href": "page/pass.html",
+              "icon": "fa fa-check",
+              "target": "_self"
+            },
+            {
+              "title": "已拒绝",
+              "href": "page/refuse.html",
+              "icon": "fa fa-close",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "公司列表",
+          "href": "page/companylist.html",
+          "icon": "fa fa-meetup",
+          "target": "_self",
+          "child": [
+            {
+              "title": "未审核",
+              "href": "page/unexamined-company.html",
+              "icon": "fa fa-calendar-o",
+              "target": "_self"
+            },
+            {
+              "title": "已通过",
+              "href": "page/pass-company.html",
+              "icon": "fa fa-check",
+              "target": "_self"
+            },
+            {
+              "title": "已拒绝",
+              "href": "page/refuse-company.html",
+              "icon": "fa fa-close",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+<style>
+    .layui-form-item .layui-input-company {
+        width: auto;
+        padding-right: 10px;
+        line-height: 38px;
+    }
+</style>
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main">
+        <div class="layui-form layuimini-form">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>公司信息</legend>
+            </fieldset>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required ">公司联系方式</label>
+                <div class="layui-input-block" style="width: 300px">
+                    <input type="tel" name="phone" lay-verify="required" lay-reqtext="联系方式不能为空" placeholder="请输入联系方式"
+                           value="" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">公司邮箱</label>
+                <div class="layui-input-block" style="width: 300px">
+                    <input type="text" name="mail" lay-verify="required|email" lay-reqtext="邮箱不能为空" placeholder="请输入邮箱"
+                           value="" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">公司QQ</label>
+                <div class="layui-input-block" style="width: 300px">
+                    <input  type="text" name="QQ" placeholder="请输入QQ" lay-verify="number" value="" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">营业执照</label>
+                <div class="layui-input-block">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="test1">上传图片</button>
+                        <div class="layui-upload-list">
+<!--                            一个小问题：图片无法直接上传？-->
+                            <img class="layui-upload-img"  height="120" width="200" src='../images/null.png' id="demo1">
+                            <p id="demoText"></p>
+                        </div>
+                        <div style="width: 95px;">
+                            <div class="layui-progress layui-progress-big" lay-showpercent="yes" lay-filter="demo">
+                                <div class="layui-progress-bar" lay-percent=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">公司简介</label>
+                <div class="layui-input-block">
+                    <textarea name="intro" class="layui-textarea" placeholder="请输入公司简介，优秀的简介有利于贵司吸引更多的人才"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['form','upload', 'element', 'layer'], function(){
+        var $ = layui.jquery
+            ,upload = layui.upload
+            ,element = layui.element
+            ,layer = layui.layer
+            ,form = layui.form;
+
+        //常规使用 - 普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+
+                element.progress('demo', '0%'); //进度条复位
+                layer.msg('上传中', {icon: 16, time: 0});
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功的一些操作
+                //……
+                $('#demoText').html(''); //置空上传失败的状态
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+            //进度条
+            ,progress: function(n, elem, e){
+                element.progress('demo', n + '%'); //可配合 layui 进度条元素使用
+                if(n == 100){
+                    layer.msg('上传完毕', {icon: 1});
+                }
+            }
+        });
+
+
+    });
+
+    layui.use(['form', 'miniPage'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            miniPage = layui.miniPage;
+
+        /**
+         * 初始化表单，要加上，不然刷新部分组件可能会不加载
+         */
+        form.render();
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var index = layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            }, function () {
+                layer.close(index);
+                miniPage.hashHome();
+            });
+            return false;
+        });
+
+    });
+</script>

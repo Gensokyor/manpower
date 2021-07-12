@@ -38,6 +38,7 @@ urlpatterns = [
     path('register/', views.regist),
     path('user_settings/', views.user_settings),
     path('setting_user/', views.setting_user),
-    ##############################
+    path('see_corp/',views.see_corp),
+    path('new_Comment/',views.new_Comment),
     path('projectData/', views.projectData),
 ]
